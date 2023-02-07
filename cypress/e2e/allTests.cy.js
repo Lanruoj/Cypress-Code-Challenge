@@ -1,4 +1,5 @@
 // import { expect } from "chai";
+// import { beforeEach } from "mocha";
 import { LoginPage } from "./pages/LoginPage";
 import { ProductPage } from "./pages/ProductsPage";
 
@@ -6,13 +7,11 @@ const loginPage = new LoginPage();
 const productPage = new ProductPage();
 
 describe("Validate login functionality", () => {
-  it("Login page loads", () => {
-    // Extends from baseUrl in config file
+  beforeEach(() => {
     cy.visit("");
   });
 
   it("Successfully logs in standard_user", () => {
-    cy.visit("");
     loginPage.login("standard_user", "secret_sauce");
     cy.get(".title").should("be.visible");
   });
