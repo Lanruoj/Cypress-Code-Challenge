@@ -66,4 +66,12 @@ export class ProductPage {
   openCart() {
     cy.get(this.cartButton).click();
   }
+
+  verifyProductAddedToCart() {
+    this.openCart();
+    cy.get(".shopping_cart_badge").should("have.text", 1);
+    cy.get(".cart_item").should("be.visible");
+    cy.get(".inventory_item_name").should("have.text", "Sauce Labs Backpack");
+    cy.get('[data-test="remove-sauce-labs-backpack"]').should("be.visible");
+  }
 }
