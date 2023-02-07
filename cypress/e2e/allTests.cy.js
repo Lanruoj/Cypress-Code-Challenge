@@ -9,6 +9,7 @@ const productPage = new ProductPage();
 describe("Validate login functionality", () => {
   beforeEach(() => {
     cy.visit("");
+    loginPage.loginFormExists();
   });
 
   it("Successfully logs in standard_user", () => {
