@@ -10,6 +10,7 @@ describe("Validate login functionality", () => {
 
   it("Successfully logs in standard_user", () => {
     cy.visit("");
-    loginPage.login("standard_user", "secret_sauce");
+    loginPage.login("standard_x", "secret_sauce");
+    cy.get(".title");
   });
 });
