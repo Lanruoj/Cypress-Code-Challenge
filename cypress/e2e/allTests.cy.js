@@ -1,3 +1,4 @@
+// import { expect } from "chai";
 import { LoginPage } from "./pages/LoginPage";
 import { ProductPage } from "./pages/ProductsPage";
 
@@ -13,7 +14,7 @@ describe("Validate login functionality", () => {
   it("Successfully logs in standard_user", () => {
     cy.visit("");
     loginPage.login("standard_user", "secret_sauce");
-    cy.get(".title");
+    cy.get(".title").should("be.visible");
   });
 });
 
