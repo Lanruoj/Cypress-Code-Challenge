@@ -5,6 +5,8 @@ export class ProductPage {
   lastProduct =
     ":last-child() > .inventory_item_description > .pricebar > .inventory_item_price";
   inventoryList = ".inventory_list";
+  backpackAddToCartButton = '[data-test="add-to-cart-sauce-labs-backpack"]';
+  backpackRemoveButton = '[data-test="remove-sauce-labs-backpack"]';
 
   selectLowToHigh() {
     cy.get(this.filterDropdown).as("dropdown");
@@ -50,5 +52,13 @@ export class ProductPage {
         }
       });
     });
+  }
+
+  addToCart() {
+    cy.get(this.backpackAddToCartButton).click();
+  }
+
+  verifyRemoveButtonAppears() {
+    cy.get(this.backpackRemoveButton).should("be.visible");
   }
 }
