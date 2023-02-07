@@ -1,5 +1,6 @@
 // import { expect } from "chai";
 // import { beforeEach } from "mocha";
+// import { it } from "mocha";
 import { LoginPage } from "./pages/LoginPage";
 import { ProductPage } from "./pages/ProductsPage";
 
@@ -29,15 +30,17 @@ describe("Validate login functionality", () => {
   });
 });
 
-describe("Validate filtering products low-high", () => {
+describe("Validate price filtering", () => {
   beforeEach(() => {
     cy.visit("");
     loginPage.login("standard_user", "secret_sauce");
   });
-  it("Selects low-high option", () => {
+  it("Filters products by price from low-high", () => {
     productPage.selectLowToHigh();
+    productPage.checkPriceOrder("lohi");
   });
-  it("Verifies low-high filter is applied", () => {
-    productPage.checkLoHi();
+  it("Filters products by price from high-low", () => {
+    productPage.selectHighToLow();
+    productPage.checkPriceOrder("hilo");
   });
 });
