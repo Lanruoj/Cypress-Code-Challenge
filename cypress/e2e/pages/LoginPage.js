@@ -14,4 +14,10 @@ export class LoginPage {
   clickLogin() {
     cy.get(this.loginButton).click();
   }
+
+  login(username, password) {
+    this.enterUsername(username);
+    this.enterPassword(password);
+    this.clickLogin();
+  }
 }
