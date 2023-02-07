@@ -8,6 +8,9 @@ export class ProductPage {
   backpackAddToCartButton = '[data-test="add-to-cart-sauce-labs-backpack"]';
   backpackRemoveButton = '[data-test="remove-sauce-labs-backpack"]';
   cartButton = ".shopping_cart_link";
+  cartBadge = ".shopping_cart_badge";
+  cartItem = ".cart_item";
+  cartItemName = ".inventory_item_name";
 
   selectLowToHigh() {
     cy.get(this.filterDropdown).as("dropdown");
@@ -71,9 +74,9 @@ export class ProductPage {
     this.addToCart();
     this.verifyRemoveButtonAppears();
     this.openCart();
-    cy.get(".shopping_cart_badge").should("have.text", 1);
-    cy.get(".cart_item").should("be.visible");
-    cy.get(".inventory_item_name").should("have.text", "Sauce Labs Backpack");
-    cy.get('[data-test="remove-sauce-labs-backpack"]').should("be.visible");
+    cy.get(this.cartBadge).should("have.text", 1);
+    cy.get(this.cartItem).should("be.visible");
+    cy.get(this.cartItemName).should("have.text", "Sauce Labs Backpack");
+    cy.get(this.backpackRemoveButton).should("be.visible");
   }
 }
