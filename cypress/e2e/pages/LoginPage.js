@@ -2,6 +2,11 @@ export class LoginPage {
   usernameInput = '[data-test="username"]';
   passwordInput = '[data-test="password"]';
   loginButton = '[data-test="login-button"]';
+  loginForm = "#login_button_container";
+
+  loginFormExists() {
+    cy.get(this.loginForm).should("be.visible");
+  }
 
   enterUsername(username) {
     cy.get(this.usernameInput).type(username);
