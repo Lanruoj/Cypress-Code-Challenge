@@ -11,6 +11,11 @@ export class ProductPage {
     cy.get("@dropdown").select("Price (low to high)");
   }
 
+  selectHighToLow() {
+    cy.get(this.filterDropdown).as("dropdown");
+    cy.get("@dropdown").select("Price (high to low)");
+  }
+
   getFirstProductPrice() {
     return cy.get(this.firstProduct).invoke("text");
   }
