@@ -1,5 +1,5 @@
-describe("Verify page loads successfully", () => {
-  it("visits page URL", () => {
+describe("Validate that login page is loaded", () => {
+  it("Page loads", () => {
     // Extends from baseUrl in config file
     cy.visit("");
   });
