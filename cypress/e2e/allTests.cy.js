@@ -25,4 +25,7 @@ describe("Validate filtering products low-high", () => {
   it("Selects low-high option", () => {
     productPage.selectLowToHigh();
   });
+  it("Verifies low-high filter is applied", () => {
+    productPage.checkLoHi();
+  });
 });
