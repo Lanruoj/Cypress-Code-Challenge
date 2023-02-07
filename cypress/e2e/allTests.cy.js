@@ -44,3 +44,17 @@ describe("Validate price filtering", () => {
     productPage.checkPriceOrder("hilo");
   });
 });
+
+describe("Validate 'add to cart' functionality", () => {
+  beforeEach(() => {
+    cy.visit("");
+    loginPage.login("standard_user", "secret_sauce");
+  });
+  it("Add to cart button changes to Remove button", () => {
+    productPage.addToCart();
+    productPage.verifyRemoveButtonAppears();
+  });
+  it("'Sauce Labs Backpack' adds to cart", () => {
+    productPage.verifyProductAddedToCart();
+  });
+});
