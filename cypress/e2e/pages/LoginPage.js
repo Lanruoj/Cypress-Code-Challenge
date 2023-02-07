@@ -1,28 +1,30 @@
 export class LoginPage {
-  usernameInput = '[data-test="username"]';
-  passwordInput = '[data-test="password"]';
-  loginButton = '[data-test="login-button"]';
-  loginForm = "#login_button_container";
-  errorMessage = '[data-test="error"]';
+  elements = {
+    usernameInput: () => cy.get('[data-test="username"]'),
+    passwordInput: () => cy.get('[data-test="password"]'),
+    loginButton: () => cy.get('[data-test="login-button"]'),
+    loginForm: () => cy.get("#login_button_container"),
+    errorMessage: () => cy.get('[data-test="error"]'),
+  };
 
   loginFormExists() {
-    cy.get(this.loginForm).should("be.visible");
+    this.elements.loginForm().should("be.visible");
   }
 
   errorMessageExists() {
-    cy.get(this.errorMessage).should("be.visible");
+    this.elements.errorMessage().should("be.visible");
   }
 
   enterUsername(username) {
-    cy.get(this.usernameInput).type(username);
+    this.elements.usernameInput().type(username);
   }
 
   enterPassword(password) {
-    cy.get(this.passwordInput).type(password);
+    this.elements.passwordInput().type(password);
   }
 
   clickLogin() {
-    cy.get(this.loginButton).click();
+    this.elements.loginButton().click();
   }
 
   login(username, password) {
@@ -31,7 +33,7 @@ export class LoginPage {
     this.clickLogin();
   }
 
-  verifyLogin() {
+  verifyRoutedToInventory() {
     // Verify routed to /inventory.html
     cy.location().should((loc) => {
       expect(loc.pathname).to.not.eq("");
