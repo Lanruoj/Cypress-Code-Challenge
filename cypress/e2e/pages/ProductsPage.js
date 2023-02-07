@@ -68,6 +68,8 @@ export class ProductPage {
   }
 
   verifyProductAddedToCart() {
+    this.addToCart();
+    this.verifyRemoveButtonAppears();
     this.openCart();
     cy.get(".shopping_cart_badge").should("have.text", 1);
     cy.get(".cart_item").should("be.visible");

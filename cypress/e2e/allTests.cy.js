@@ -54,4 +54,7 @@ describe("Validate 'add to cart' functionality", () => {
     productPage.addToCart();
     productPage.verifyRemoveButtonAppears();
   });
+  it("'Sauce Labs Backpack' adds to cart", () => {
+    productPage.verifyProductAddedToCart();
+  });
 });
