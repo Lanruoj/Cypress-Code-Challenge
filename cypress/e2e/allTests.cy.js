@@ -13,8 +13,13 @@ describe("Validate login functionality", () => {
     loginPage.loginFormExists();
   });
   // Attempt login with invalid username
-  it("Unsuccessfully logs in invalid username", () => {
+  it("Unsuccessfully logs in with invalid username", () => {
     loginPage.login("invalid_user", "secret_sauce");
+    loginPage.errorMessageExists();
+  });
+  // Attempt login with invalid password
+  it("Unsuccessfully logs in with invalid password", () => {
+    loginPage.login("standard_user", "wrong_password");
     loginPage.errorMessageExists();
   });
   // Login with valid user
