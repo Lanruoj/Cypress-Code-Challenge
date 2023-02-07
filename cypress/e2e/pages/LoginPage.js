@@ -6,4 +6,8 @@ export class LoginPage {
   enterUsername(username) {
     cy.get(this.usernameInput).type(username);
   }
+
+  enterPassword(password) {
+    cy.get(this.passwordInput).type(password);
+  }
 }
