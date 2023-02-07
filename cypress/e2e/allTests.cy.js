@@ -23,7 +23,7 @@ describe("Validate login functionality", () => {
   // Login with valid user
   it("Successfully logs in standard_user", () => {
     loginPage.login("standard_user", "secret_sauce");
-    loginPage.verifyLogin();
+    loginPage.verifyRoutedToInventory();
   });
 });
 

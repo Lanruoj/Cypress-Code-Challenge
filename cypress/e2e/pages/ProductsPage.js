@@ -1,33 +1,41 @@
 export class ProductPage {
-  filterDropdown = '[data-test="product_sort_container"]';
-  firstProduct =
-    ":nth-child(1) > .inventory_item_description > .pricebar > .inventory_item_price";
-  lastProduct =
-    ":last-child() > .inventory_item_description > .pricebar > .inventory_item_price";
-  inventoryList = ".inventory_list";
-  backpackAddToCartButton = '[data-test="add-to-cart-sauce-labs-backpack"]';
-  backpackRemoveButton = '[data-test="remove-sauce-labs-backpack"]';
-  cartButton = ".shopping_cart_link";
-  cartBadge = ".shopping_cart_badge";
-  cartItem = ".cart_item";
-  cartItemName = ".inventory_item_name";
+  elements = {
+    filterDropdown: () => cy.get('[data-test="product_sort_container"]'),
+    firstProduct: () =>
+      cy.get(
+        ":nth-child(1) > .inventory_item_description > .pricebar > .inventory_item_price"
+      ),
+    lastProduct: () =>
+      cy.get(
+        ":last-child() > .inventory_item_description > .pricebar > .inventory_item_price"
+      ),
+    inventoryList: () => cy.get(".inventory_list"),
+    backpackAddToCartButton: () =>
+      cy.get('[data-test="add-to-cart-sauce-labs-backpack"]'),
+    backpackRemoveButton: () =>
+      cy.get('[data-test="remove-sauce-labs-backpack"]'),
+    cartButton: () => cy.get(".shopping_cart_link"),
+    cartBadge: () => cy.get(".shopping_cart_badge"),
+    cartItem: () => cy.get(".cart_item"),
+    cartItemName: () => cy.get(".inventory_item_name"),
+  };
 
   selectLowToHigh() {
-    cy.get(this.filterDropdown).as("dropdown");
+    this.elements.filterDropdown().as("dropdown");
     cy.get("@dropdown").select("Price (low to high)");
   }
 
   selectHighToLow() {
-    cy.get(this.filterDropdown).as("dropdown");
+    this.elements.filterDropdown().as("dropdown");
     cy.get("@dropdown").select("Price (high to low)");
   }
 
   getFirstProductPrice() {
-    return cy.get(this.firstProduct).invoke("text");
+    return this.elements.firstProduct().invoke("text");
   }
 
   getLastProductPrice() {
-    return cy.get(this.lastProduct).invoke("text");
+    return this.elements.lastProduct().invoke("text");
   }
 
   checkPriceOrder(direction) {
@@ -59,24 +67,24 @@ export class ProductPage {
   }
 
   addToCart() {
-    cy.get(this.backpackAddToCartButton).click();
+    this.elements.backpackAddToCartButton().click();
   }
 
   verifyRemoveButtonAppears() {
-    cy.get(this.backpackRemoveButton).should("be.visible");
+    this.elements.backpackRemoveButton().should("be.visible");
   }
 
   openCart() {
-    cy.get(this.cartButton).click();
+    this.elements.cartButton().click();
   }
 
   verifyProductAddedToCart() {
     this.addToCart();
     this.verifyRemoveButtonAppears();
     this.openCart();
-    cy.get(this.cartBadge).should("have.text", 1);
-    cy.get(this.cartItem).should("be.visible");
-    cy.get(this.cartItemName).should("have.text", "Sauce Labs Backpack");
-    cy.get(this.backpackRemoveButton).should("be.visible");
+    this.elements.cartBadge().should("have.text", 1);
+    this.elements.cartItem().should("be.visible");
+    this.elements.cartItemName().should("have.text", "Sauce Labs Backpack");
+    this.elements.backpackRemoveButton().should("be.visible");
   }
 }
