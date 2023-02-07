@@ -1,6 +1,3 @@
-// import { expect } from "chai";
-// import { beforeEach } from "mocha";
-// import { it } from "mocha";
 import { LoginPage } from "./pages/LoginPage";
 import { ProductPage } from "./pages/ProductsPage";
 
