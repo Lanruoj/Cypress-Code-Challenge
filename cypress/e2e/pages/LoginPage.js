@@ -10,4 +10,8 @@ export class LoginPage {
   enterPassword(password) {
     cy.get(this.passwordInput).type(password);
   }
+
+  clickLogin() {
+    cy.get(this.loginButton).click();
+  }
 }
