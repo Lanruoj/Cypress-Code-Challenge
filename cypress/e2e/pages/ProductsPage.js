@@ -24,8 +24,12 @@ export class ProductPage {
     return cy.get(this.lastProduct).invoke("text");
   }
 
-  checkLoHi() {
-    this.selectLowToHigh();
+  checkPriceOrder(direction) {
+    if (direction === "lohi") {
+      this.selectLowToHigh();
+    } else if (direction === "hilo") {
+      this.selectHighToLow();
+    }
     // Get first & last product prices
     this.getFirstProductPrice().as("firstPrice");
     this.getLastProductPrice().as("lastPrice");
@@ -39,7 +43,11 @@ export class ProductPage {
         const lastPriceInteger = Number(
           lastProduct.split("$")[1].split(".")[0]
         );
-        expect(firstPriceInteger).to.be.lessThan(lastPriceInteger);
+        if (direction === "lohi") {
+          expect(firstPriceInteger).to.be.lessThan(lastPriceInteger);
+        } else if (direction === "hilo") {
+          expect(firstPriceInteger).to.be.greaterThan(lastPriceInteger);
+        }
       });
     });
   }
