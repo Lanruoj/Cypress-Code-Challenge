@@ -30,4 +30,14 @@ export class LoginPage {
     this.enterPassword(password);
     this.clickLogin();
   }
+
+  verifyLogin() {
+    // Verify routed to /inventory.html
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.not.eq("");
+    });
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq("/inventory.html");
+    });
+  }
 }

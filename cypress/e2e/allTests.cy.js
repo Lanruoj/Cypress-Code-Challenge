@@ -1,6 +1,3 @@
-// import { expect } from "chai";
-// import { beforeEach } from "mocha";
-// import { it } from "mocha";
 import { LoginPage } from "./pages/LoginPage";
 import { ProductPage } from "./pages/ProductsPage";
 
@@ -26,7 +23,7 @@ describe("Validate login functionality", () => {
   // Login with valid user
   it("Successfully logs in standard_user", () => {
     loginPage.login("standard_user", "secret_sauce");
-    cy.get(".title").should("be.visible");
+    loginPage.verifyLogin();
   });
 });
 
