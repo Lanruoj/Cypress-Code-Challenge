@@ -7,6 +7,7 @@ export class ProductPage {
   inventoryList = ".inventory_list";
   backpackAddToCartButton = '[data-test="add-to-cart-sauce-labs-backpack"]';
   backpackRemoveButton = '[data-test="remove-sauce-labs-backpack"]';
+  cartButton = ".shopping_cart_link";
 
   selectLowToHigh() {
     cy.get(this.filterDropdown).as("dropdown");
@@ -60,5 +61,9 @@ export class ProductPage {
 
   verifyRemoveButtonAppears() {
     cy.get(this.backpackRemoveButton).should("be.visible");
+  }
+
+  openCart() {
+    cy.get(this.cartButton).click();
   }
 }
