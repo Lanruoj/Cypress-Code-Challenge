@@ -20,14 +20,25 @@ export class ProductPage {
     cartItemName: () => cy.get(".inventory_item_name"),
   };
 
-  selectLowToHigh() {
-    this.elements.filterDropdown().as("dropdown");
-    cy.get("@dropdown").select("Price (low to high)");
-  }
+  // selectLowToHigh() {
+  //   this.elements.filterDropdown().as("dropdown");
+  //   cy.get("@dropdown").select("Price (low to high)");
+  // }
 
-  selectHighToLow() {
+  // selectHighToLow() {
+  //   this.elements.filterDropdown().as("dropdown");
+  //   cy.get("@dropdown").select("Price (high to low)");
+  // }
+
+  selectFilterOrder(direction) {
     this.elements.filterDropdown().as("dropdown");
-    cy.get("@dropdown").select("Price (high to low)");
+    cy.get("@dropdown").select(
+      direction === "lohi"
+        ? "Price (low to high)"
+        : direction === "hilo"
+        ? "Price (high to low)"
+        : null
+    );
   }
 
   getFirstProductPrice() {
