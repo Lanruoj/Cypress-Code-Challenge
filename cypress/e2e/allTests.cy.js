@@ -1,3 +1,4 @@
+// import { it } from "mocha";
 import { LoginPage } from "./pages/LoginPage";
 import { ProductPage } from "./pages/ProductsPage";
 
@@ -51,5 +52,8 @@ describe("Validate 'add to cart' functionality", () => {
   });
   it("'Sauce Labs Backpack' adds to cart", () => {
     productPage.verifyProductAddedToCart();
+  });
+  it("All products add to cart", () => {
+    productPage.verifyAllProductsAddToCart();
   });
 });
