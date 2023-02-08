@@ -1,10 +1,10 @@
 # **Cypress code challenge**
 
-## **Description:**
+## **Description**
 
 Evaluating my testing skills using the Cypress test framework on Sauce Lab's [saucedemo](https://saucedemo.com) web app.
 
-## **Instructions:**
+## **Instructions**
 
 > - Visit page “https://www.saucedemo.com/”
 > - Validate that login page is loaded
@@ -19,6 +19,6 @@ Evaluating my testing skills using the Cypress test framework on Sauce Lab's [sa
 
 _(Winning Group, 2023)_
 
-## **Project management:**
+## **Project management**
 
 [Trello board](https://trello.com/invite/b/wttKYd4l/ATTI2604449421f90e4c87b300d7b074dc2339B91B0E/cypress-challenge)
