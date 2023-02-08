@@ -85,4 +85,20 @@ export class ProductPage {
     this.elements.cartItemName().should("have.text", "Sauce Labs Backpack");
     this.elements.backpackRemoveButton().should("be.visible");
   }
+
+  verifyAllProductsAddToCart() {
+    let productCount = 0;
+    // Click all "add to cart" buttons
+    cy.get(".btn_inventory")
+      .each(($button) => {
+        cy.wrap($button).click();
+        productCount++;
+      })
+      .then(() => {
+        // Verify that cart badge & item list equals amount of products
+        this.elements.cartBadge().should("have.text", productCount);
+        this.elements.cartButton().click();
+        this.elements.cartItem().should("have.length", productCount);
+      });
+  }
 }
