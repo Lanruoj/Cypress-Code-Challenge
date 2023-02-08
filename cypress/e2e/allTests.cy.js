@@ -1,3 +1,4 @@
+// import { it } from "mocha";
 import { LoginPage } from "./pages/LoginPage";
 import { ProductPage } from "./pages/ProductsPage";
 
@@ -33,12 +34,10 @@ describe("Validate price filtering", () => {
     loginPage.login("standard_user", "secret_sauce");
   });
   it("Filters products by price from low-high", () => {
-    productPage.selectLowToHigh();
-    productPage.checkPriceOrder("lohi");
+    productPage.verifyPriceFilter("lohi");
   });
   it("Filters products by price from high-low", () => {
-    productPage.selectHighToLow();
-    productPage.checkPriceOrder("hilo");
+    productPage.verifyPriceFilter("hilo");
   });
 });
 
@@ -53,5 +52,8 @@ describe("Validate 'add to cart' functionality", () => {
   });
   it("'Sauce Labs Backpack' adds to cart", () => {
     productPage.verifyProductAddedToCart();
+  });
+  it("All products add to cart", () => {
+    productPage.verifyAllProductsAddToCart();
   });
 });

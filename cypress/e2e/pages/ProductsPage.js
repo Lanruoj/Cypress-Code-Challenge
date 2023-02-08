@@ -20,14 +20,15 @@ export class ProductPage {
     cartItemName: () => cy.get(".inventory_item_name"),
   };
 
-  selectLowToHigh() {
+  selectFilterOrder(direction) {
     this.elements.filterDropdown().as("dropdown");
-    cy.get("@dropdown").select("Price (low to high)");
-  }
-
-  selectHighToLow() {
-    this.elements.filterDropdown().as("dropdown");
-    cy.get("@dropdown").select("Price (high to low)");
+    cy.get("@dropdown").select(
+      direction === "lohi"
+        ? "Price (low to high)"
+        : direction === "hilo"
+        ? "Price (high to low)"
+        : null
+    );
   }
 
   getFirstProductPrice() {
@@ -38,12 +39,8 @@ export class ProductPage {
     return this.elements.lastProduct().invoke("text");
   }
 
-  checkPriceOrder(direction) {
-    if (direction === "lohi") {
-      this.selectLowToHigh();
-    } else if (direction === "hilo") {
-      this.selectHighToLow();
-    }
+  verifyPriceFilter(direction) {
+    this.selectFilterOrder(direction);
     // Get first & last product prices
     this.getFirstProductPrice().as("firstPrice");
     this.getLastProductPrice().as("lastPrice");
@@ -57,6 +54,7 @@ export class ProductPage {
         const lastPriceInteger = Number(
           lastProduct.split("$")[1].split(".")[0]
         );
+        // Compare prices based on direction argument
         if (direction === "lohi") {
           expect(firstPriceInteger).to.be.lessThan(lastPriceInteger);
         } else if (direction === "hilo") {
@@ -86,5 +84,21 @@ export class ProductPage {
     this.elements.cartItem().should("be.visible");
     this.elements.cartItemName().should("have.text", "Sauce Labs Backpack");
     this.elements.backpackRemoveButton().should("be.visible");
+  }
+
+  verifyAllProductsAddToCart() {
+    let productCount = 0;
+    // Click all "add to cart" buttons
+    cy.get(".btn_inventory")
+      .each(($button) => {
+        cy.wrap($button).click();
+        productCount++;
+      })
+      .then(() => {
+        // Verify that cart badge & item list equals amount of products
+        this.elements.cartBadge().should("have.text", productCount);
+        this.elements.cartButton().click();
+        this.elements.cartItem().should("have.length", productCount);
+      });
   }
 }
