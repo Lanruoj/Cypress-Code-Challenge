@@ -45,15 +45,13 @@ export class ProductPage {
     this.getFirstProductPrice().as("firstPrice");
     this.getLastProductPrice().as("lastPrice");
     // Compare prices to check which order list is in
-    cy.get("@firstPrice").then((firstProduct) => {
-      cy.get("@lastPrice").then((lastProduct) => {
+    cy.get("@firstPrice").then((firstPrice) => {
+      cy.get("@lastPrice").then((lastPrice) => {
         // Parse whole number from prices
         const firstPriceInteger = Number(
-          firstProduct.split("$")[1].split(".")[0]
+          firstPrice.split("$")[1].split(".")[0]
         );
-        const lastPriceInteger = Number(
-          lastProduct.split("$")[1].split(".")[0]
-        );
+        const lastPriceInteger = Number(lastPrice.split("$")[1].split(".")[0]);
         // Compare prices based on direction argument
         if (direction === "lohi") {
           expect(firstPriceInteger).to.be.lessThan(lastPriceInteger);
