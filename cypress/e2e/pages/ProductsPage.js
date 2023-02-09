@@ -1,14 +1,7 @@
 export class ProductPage {
   elements = {
     filterDropdown: () => cy.get('[data-test="product_sort_container"]'),
-    firstProduct: () =>
-      cy.get(
-        ":nth-child(1) > .inventory_item_description > .pricebar > .inventory_item_price"
-      ),
-    lastProduct: () =>
-      cy.get(
-        ":last-child() > .inventory_item_description > .pricebar > .inventory_item_price"
-      ),
+    allProductPrices: () => cy.get(".inventory_item_price"),
     inventoryList: () => cy.get(".inventory_list"),
     backpackAddToCartButton: () =>
       cy.get('[data-test="add-to-cart-sauce-labs-backpack"]'),
@@ -31,34 +24,16 @@ export class ProductPage {
     );
   }
 
-  getFirstProductPrice() {
-    return this.elements.firstProduct().invoke("text");
-  }
-
-  getLastProductPrice() {
-    return this.elements.lastProduct().invoke("text");
-  }
-
   verifyPriceFilter(direction) {
     this.selectFilterOrder(direction);
-    // Get first & last product prices
-    this.getFirstProductPrice().as("firstPrice");
-    this.getLastProductPrice().as("lastPrice");
-    // Compare prices to check which order list is in
-    cy.get("@firstPrice").then((firstPrice) => {
-      cy.get("@lastPrice").then((lastPrice) => {
-        // Parse whole number from prices
-        const firstPriceInteger = Number(
-          firstPrice.split("$")[1].split(".")[0]
-        );
-        const lastPriceInteger = Number(lastPrice.split("$")[1].split(".")[0]);
-        // Compare prices based on direction argument
-        if (direction === "lohi") {
-          expect(firstPriceInteger).to.be.lessThan(lastPriceInteger);
-        } else if (direction === "hilo") {
-          expect(firstPriceInteger).to.be.greaterThan(lastPriceInteger);
-        }
-      });
+    let price = direction === "lohi" ? 0 : Infinity;
+    this.elements.allProductPrices().each(($price) => {
+      const priceInteger = Number($price.text().replace(/\D/g, ""));
+      cy.wrap(priceInteger).should(
+        `be.${direction === "lohi" ? "gte" : "lte"}`,
+        price
+      );
+      price = priceInteger;
     });
   }
 
