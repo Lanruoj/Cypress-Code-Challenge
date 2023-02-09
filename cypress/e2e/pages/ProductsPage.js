@@ -1,14 +1,6 @@
 export class ProductPage {
   elements = {
     filterDropdown: () => cy.get('[data-test="product_sort_container"]'),
-    // firstProduct: () =>
-    //   cy.get(
-    //     ":nth-child(1) > .inventory_item_description > .pricebar > .inventory_item_price"
-    //   ),
-    // lastProduct: () =>
-    //   cy.get(
-    //     ":last-child() > .inventory_item_description > .pricebar > .inventory_item_price"
-    //   ),
     allProductPrices: () => cy.get(".inventory_item_price"),
     inventoryList: () => cy.get(".inventory_list"),
     backpackAddToCartButton: () =>
