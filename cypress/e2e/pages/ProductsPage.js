@@ -28,7 +28,7 @@ export class ProductPage {
     this.selectFilterOrder(direction);
     let price = direction === "lohi" ? 0 : Infinity;
     this.elements.allProductPrices().each(($price) => {
-      const priceInteger = Number($price.text().replace(/\D/g, ""));
+      const priceInteger = Number($price.text().replace("$", ""));
       cy.wrap(priceInteger).should(
         `be.${direction === "lohi" ? "gte" : "lte"}`,
         price
